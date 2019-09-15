@@ -21,15 +21,16 @@ void generate_permutations(int64_t * a, int64_t * b, int64_t n){
   permute(a, b, 0, n-1, n);
 }
 void permute(int64_t * a, int64_t * b, int64_t l, int64_t r, int64_t n){
+  int64_t g;
   if(l == r){
     if(counter++==chosen){
-      for(int64_t g = 0; g < n; g++){
+      for(g = 0; g < n; g++){
         b[g] = a[g];
       }
     }
   } else {
     if(counter > chosen) return;
-    for(int64_t g = l; g <= r; g++){
+    for(g = l; g <= r; g++){
       swap(a+l, a+g);
       permute(a, b, l+1, r, n);
       swap(a+l, a+g);
@@ -37,11 +38,12 @@ void permute(int64_t * a, int64_t * b, int64_t l, int64_t r, int64_t n){
   }
 }
 void get_jth_random_permutation(int64_t * a, int64_t * b, int64_t n, int64_t j){
-  for(int64_t g = 0; g < n; g++){
+  int64_t g;
+  for(g = 0; g < n; g++){
     b[g] = a[g];
   }
   srand(0);
-  for(int64_t g = 0; g < j; g++){
+  for(g = 0; g < j; g++){
     //printf("shuffling permutation %ld times\n", j);
     int64_t x = (int64_t)((double) n * (double) rand() / (double) RAND_MAX);
     int64_t c = 0;
@@ -60,8 +62,10 @@ void get_jth_random_permutation(int64_t * a, int64_t * b, int64_t n, int64_t j){
     }
     swap(b+x, b+y);
   }
+  /*
   printf("permutation %ld = ", j);
-  for(int64_t g = 0; g < n; g++){
+  for(g = 0; g < n; g++){
     printf("%ld ", b[g]);
   }
+  */
 }
